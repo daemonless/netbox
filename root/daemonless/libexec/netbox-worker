@@ -1,0 +1,4 @@
+#!/bin/sh
+export HOME=/config
+cd /app/netbox
+exec dsu bsd /app/venv/bin/python manage.py rqworker high default low

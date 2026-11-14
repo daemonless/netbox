@@ -1,0 +1,46 @@
+#!/bin/sh
+set -e
+NB=/app/netbox
+PY=/app/venv/bin/python
+
+mkdir -p /config/media /config/scripts
+
+gen() {
+  "$PY" -c 'import secrets,string;a=string.ascii_letters+string.digits+"!@#%^&*(-_=+)";print("".join(secrets.choice(a) for _ in range(64)))'
+}
+[ -n "$NETBOX_SECRET_KEY" ]       || [ -s /config/secret_key ]       || gen > /config/secret_key
+[ -n "$NETBOX_API_TOKEN_PEPPER" ] || [ -s /config/api_token_pepper ] || gen > /config/api_token_pepper
+chmod 600 /config/secret_key /config/api_token_pepper 2>/dev/null || true
+chown -R bsd:bsd /config
+
+cd "$NB"
+
+# Wait for PostgreSQL (max ~2 min)
+i=0
+until dsu bsd "$PY" manage.py shell -c \
+  'from django.db import connection; connection.ensure_connection()' >/dev/null 2>&1; do
+  i=$((i+1)); [ "$i" -ge 60 ] && { echo "netbox: database unreachable" >&2; exit 1; }
+  sleep 2
+done
+
+if [ "${NETBOX_SKIP_MIGRATIONS:-false}" = "true" ]; then
+  echo "netbox: NETBOX_SKIP_MIGRATIONS=true, skipping migrations and maintenance"
+elif [ "${NETBOX_FORCE_MAINTENANCE:-false}" = "true" ] || \
+     ! dsu bsd "$PY" manage.py migrate --check >/dev/null 2>&1; then
+  echo "netbox: applying migrations and post-upgrade maintenance"
+  dsu bsd "$PY" manage.py migrate --no-input
+  dsu bsd "$PY" manage.py trace_paths --no-input
+  dsu bsd "$PY" manage.py remove_stale_contenttypes --no-input
+  dsu bsd "$PY" manage.py reindex --lazy
+  dsu bsd "$PY" manage.py clearsessions
+else
+  echo "netbox: database is up to date, skipping migrations and maintenance"
+fi
+
+# Optional first-run admin
+if [ -n "$SUPERUSER_NAME" ] && [ -n "$SUPERUSER_PASSWORD" ]; then
+  DJANGO_SUPERUSER_USERNAME="$SUPERUSER_NAME" \
+  DJANGO_SUPERUSER_PASSWORD="$SUPERUSER_PASSWORD" \
+  DJANGO_SUPERUSER_EMAIL="${SUPERUSER_EMAIL:-admin@example.com}" \
+    dsu bsd "$PY" manage.py createsuperuser --no-input >/dev/null 2>&1 || true
+fi

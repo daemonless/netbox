@@ -1,0 +1,49 @@
+name: netbox-cit
+
+services:
+  netbox:
+    image: ghcr.io/daemonless/netbox:build
+    environment:
+      - DAEMONLESS_BANNER=${DAEMONLESS_BANNER}
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - DB_HOST=localhost
+      - DB_PASSWORD=postrges_pw
+      - REDIS_HOST=localhost
+      - SUPERUSER_NAME=admin
+      - SUPERUSER_PASSWORD=Changeme
+      - GRANIAN_WORKERS=4
+      - GRANIAN_PORT=18080
+    volumes:
+      -  config:/config
+    depends_on: [postgres, redis]
+    network_mode: host
+    restart: unless-stopped
+  postgres:
+    image: ghcr.io/daemonless/postgres:18
+    environment:
+      - DAEMONLESS_BANNER=${DAEMONLESS_BANNER}
+      - POSTGRES_DB=netbox
+      - POSTGRES_USER=netbox
+      - POSTGRES_PASSWORD=postgres_pw
+    annotations:
+      org.freebsd.jail.allow.sysvipc: "true"
+    volumes:
+      -  postgres:/var/lib/postgresql/data
+    network_mode: host
+    restart: unless-stopped
+  redis:
+    image: ghcr.io/daemonless/redis:latest
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      - DAEMONLESS_BANNER=${DAEMONLESS_BANNER}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - redis:/config
+
+volumes:
+  config:
+  postgres:
+  redis:

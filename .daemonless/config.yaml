@@ -1,0 +1,14 @@
+build:
+  architectures: ["amd64"]
+  variants:
+    - tag: latest
+      containerfile: Containerfile
+      default: true
+
+cit:
+  compose: true      # start postgres + redis too
+  mode: screenshot
+  edge_threshold: 0.004
+  port: 18080
+  health: /login/
+  wait: 600          # first boot runs all migrations

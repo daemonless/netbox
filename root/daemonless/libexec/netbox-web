@@ -1,0 +1,21 @@
+#!/bin/sh
+export HOME=/config
+
+# Defaults; any of these can be overridden from the container environment
+NCPU=$(nproc 2>/dev/null || sysctl -n hw.ncpu)
+export GRANIAN_INTERFACE="${GRANIAN_INTERFACE:=wsgi}"
+export GRANIAN_HOST="${GRANIAN_HOST:=0.0.0.0}"
+export GRANIAN_PORT="${GRANIAN_PORT:=8080}"
+# More processes = more parallel Python; threads only help while waiting on the DB
+export GRANIAN_WORKERS="${GRANIAN_WORKERS:=$((NCPU + 1))}"
+export GRANIAN_BLOCKING_THREADS="${GRANIAN_BLOCKING_THREADS:=4}"
+export GRANIAN_RESPAWN_FAILED_WORKERS="${GRANIAN_RESPAWN_FAILED_WORKERS:=true}"
+export GRANIAN_WORKERS_LIFETIME="${GRANIAN_WORKERS_LIFETIME:=6h}"
+export GRANIAN_LOG_ACCESS_ENABLED="${GRANIAN_LOG_ACCESS_ENABLED:=true}"
+export GRANIAN_STATIC_PATH_ROUTE="${GRANIAN_STATIC_PATH_ROUTE:=/static}"
+export GRANIAN_STATIC_PATH_MOUNT="${GRANIAN_STATIC_PATH_MOUNT:=/app/netbox/static}"
+export GRANIAN_STATIC_PATH_DIR_TO_FILE="${GRANIAN_STATIC_PATH_DIR_TO_FILE:=index.html}"
+export GRANIAN_STATIC_PATH_EXPIRES="${GRANIAN_STATIC_PATH_EXPIRES:=1d}"
+
+cd /app/netbox
+exec dsu bsd /app/venv/bin/granian "${NETBOX_WSGI_APP:-netbox.wsgi_warm:application}"
