@@ -38,49 +38,175 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 
 ### Podman Compose
 
-```yaml
+**1.** Save as `.env` and fill in what is empty:
+
+```env { data-zip-bundle="netbox-podman" data-zip-filename=".env" }
+# NetBox for FreeBSD (Daemonless)
+# Copy to .env and edit.
+
+# Host paths for persistent storage
+NETBOX_CONFIG_PATH=/containers/netbox/config
+DB_DATA_LOCATION=/containers/netbox/postgres
+
+# Database password and first-run admin (change both before first start)
+DB_NAME=netbox
+DB_USER=netbox
+DB_PASSWORD=changeme
+SUPERUSER_NAME=admin
+SUPERUSER_PASSWORD=changeme
+
+TZ=UTC
+```
+
+**2.** Save as `compose.yaml`:
+
+```yaml { data-zip-bundle="netbox-podman" data-zip-filename="compose.yaml" }
 name: netbox
 
 services:
   netbox:
     image: ghcr.io/daemonless/netbox:latest
     container_name: netbox
+    network_mode: host
+    depends_on: [postgres, redis]
+    restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=UTC
-      - DB_HOST=postgres
-      - DB_PASSWORD=changeme
-      - REDIS_HOST=redis
-      - SUPERUSER_NAME=admin
-      - SUPERUSER_PASSWORD=changeme
-      - GRANIAN_WORKERS=4
+      - TZ=${TZ:-UTC}
+      - DB_HOST=${DB_HOST:-127.0.0.1}
+      - DB_NAME=${DB_NAME:-netbox}
+      - DB_USER=${DB_USER:-netbox}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - REDIS_HOST=${REDIS_HOST:-127.0.0.1}
+      - SUPERUSER_NAME=${SUPERUSER_NAME:-admin}
+      - SUPERUSER_PASSWORD=${SUPERUSER_PASSWORD}
+      - GRANIAN_WORKERS=${GRANIAN_WORKERS:-4}
       # - GRANIAN_WORKERS_LIFETIME=12h
     volumes:
-      - /containers/netbox:/config
+      - ${NETBOX_CONFIG_PATH}:/config
     ports:
       - 8080:8080
-    depends_on: [postgres, redis]
-    restart: always
 
-  postgres:                        # placeholder: any PostgreSQL 15+ FreeBSD image
+  postgres:
     image: ghcr.io/daemonless/postgres:18
-    environment:
-      - POSTGRES_DB=netbox
-      - POSTGRES_USER=netbox
-      - POSTGRES_PASSWORD=changeme
+    container_name: netbox-postgres
+    network_mode: host
+    restart: unless-stopped
     annotations:
       org.freebsd.jail.allow.sysvipc: "true"
+    environment:
+      - POSTGRES_DB=${DB_NAME:-netbox}
+      - POSTGRES_USER=${DB_USER:-netbox}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
-      - /containers/netbox/postgres:/var/lib/postgresql/data
-    restart: always
+      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
 
-  redis:                           # placeholder: any Redis/Valkey FreeBSD image
+  redis:
     image: ghcr.io/daemonless/redis:latest
-    restart: always
+    container_name: netbox-redis
+    network_mode: host
+    restart: unless-stopped
 ```
 
 Then run `podman-compose up -d`.
+
+### AppJail Director
+**.env**:
+
+```
+# .env
+
+DIRECTOR_PROJECT=netbox
+PUID=1000
+PGID=1000
+TZ=UTC
+DB_HOST=127.0.0.1
+DB_NAME=netbox
+DB_USER=netbox
+DB_PASSWORD=changeme
+REDIS_HOST=127.0.0.1
+SUPERUSER_NAME=admin
+SUPERUSER_PASSWORD=changeme
+GRANIAN_WORKERS=4
+NETBOX_CONFIG_PATH=/containers/netbox/config
+DB_DATA_LOCATION=/containers/netbox/postgres
+```
+
+**appjail-director.yml**:
+
+```yaml
+# appjail-director.yml
+
+options:
+  - alias:
+  - ip4_inherit:
+services:
+  netbox:
+    name: netbox
+    options:
+      - container: 'args:--pull'
+    oci:
+      user: root
+      environment:
+        - PUID: !ENV '${PUID}'
+        - PGID: !ENV '${PGID}'
+        - TZ: !ENV '${TZ}'
+        - DB_HOST: !ENV '${DB_HOST}'
+        - DB_NAME: !ENV '${DB_NAME}'
+        - DB_USER: !ENV '${DB_USER}'
+        - DB_PASSWORD: !ENV '${DB_PASSWORD}'
+        - REDIS_HOST: !ENV '${REDIS_HOST}'
+        - SUPERUSER_NAME: !ENV '${SUPERUSER_NAME}'
+        - SUPERUSER_PASSWORD: !ENV '${SUPERUSER_PASSWORD}'
+        - GRANIAN_WORKERS: !ENV '${GRANIAN_WORKERS}'
+        - NETBOX_CONFIG_PATH: !ENV '${NETBOX_CONFIG_PATH}'
+        - DB_DATA_LOCATION: !ENV '${DB_DATA_LOCATION}'
+    volumes:
+      - netbox: /config
+  postgres:
+    name: postgres
+    options:
+      - from: ghcr.io/daemonless/postgres:18
+      - template: !ENV '${PWD}/postgres-template.conf'
+    oci:
+      environment:
+        - POSTGRES_DB: !ENV '${DB_NAME}'
+        - POSTGRES_USER: !ENV '${DB_USER}'
+        - POSTGRES_PASSWORD: !ENV '${DB_PASSWORD}'
+    volumes:
+      - db_data: /var/lib/postgresql/data
+  redis:
+    name: redis
+    options:
+      - from: ghcr.io/daemonless/redis:latest
+      - template: !ENV '${PWD}/template.conf'
+volumes:
+  netbox:
+    device: '/containers/netbox'
+  db_data:
+    device: !ENV '${DB_DATA_LOCATION}'
+```
+
+**Makejail**:
+
+```
+# Makejail
+
+ARG tag=latest
+
+OPTION container=boot
+OPTION overwrite=force
+OPTION from=ghcr.io/daemonless/netbox:${tag}
+```
+
+Save the files above, then run `appjail-director up`.
+
+
+> [!WARNING]
+> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
+>
+> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
 Open `http://<server>:8080` from another machine (the server's own browser can't use a published port).
 
 ## Parameters
@@ -92,16 +218,18 @@ Open `http://<server>:8080` from another machine (the server's own browser can't
 | `PUID` | `1000` |  |
 | `PGID` | `1000` |  |
 | `TZ` | `UTC` |  |
-| `DB_HOST` | `postgres` | PostgreSQL host |
+| `DB_HOST` | `127.0.0.1` | Where NetBox finds PostgreSQL (set automatically for the built-in database; 127.0.0.1 on host networking) |
+| `DB_NAME` | `netbox` | PostgreSQL database name |
+| `DB_USER` | `netbox` | PostgreSQL user |
 | `DB_PASSWORD` | `changeme` | Database password (or DB_PASSWORD_FILE) |
-| `REDIS_HOST` | `redis` | Redis host |
+| `REDIS_HOST` | `127.0.0.1` | Where NetBox finds Redis (set automatically for the built-in Redis; 127.0.0.1 on host networking) |
 | `SUPERUSER_NAME` | `admin` | Optional first-run admin user |
 | `SUPERUSER_PASSWORD` | `changeme` | Optional first-run admin password |
 | `GRANIAN_WORKERS` | `4` | Granian worker processes (default 2) |
 | `ALLOWED_HOSTS` | `` | Space-separated hostnames (default *) |
 | `CSRF_TRUSTED_ORIGINS` | `` | Space-separated origins, e.g. https://netbox.example.com |
-| `DB_NAME` | `` | Database name |
-| `DB_USER` | `` | Database user |
+| `NETBOX_CONFIG_PATH` | `/containers/netbox/config` | Path to store NetBox secrets, media and scripts |
+| `DB_DATA_LOCATION` | `/containers/netbox/postgres` | Path to store PostgreSQL data files |
 | `NETBOX_SECRET_KEY` | `<NETBOX_SECRET_KEY>` | Optional; auto-generated into /config/secret_key |
 | `NETBOX_API_TOKEN_PEPPER` | `<NETBOX_API_TOKEN_PEPPER>` | Optional; auto-generated into /config/api_token_pepper |
 | `GRANIAN_*` | `` | Any Granian option via its env var, e.g. GRANIAN_WORKERS_LIFETIME |

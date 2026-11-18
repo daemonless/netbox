@@ -1,0 +1,991 @@
+{
+  "generated": "2026-11-18T10:31:57Z",
+  "image": "netbox",
+  "tags": {
+    "latest": {
+      "app_version": "4.7.5",
+      "arch": "amd64",
+      "generated": "2026-11-18T10:30:32Z",
+      "packages": {
+        "dotnet": [],
+        "freebsd": [
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-audit-lib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-blocklist",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-bzip2-lib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-certctl",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-clibs",
+            "version": "15.1p4"
+          },
+          {
+            "licenses": [
+              "CDDL-1.0"
+            ],
+            "name": "FreeBSD-ctf-lib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD-3-Clause"
+            ],
+            "name": "FreeBSD-dhclient",
+            "version": "15.1p4"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-fetch",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-kerberos-lib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-libarchive",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-libbsdstat",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-libcasper",
+            "version": "15.1p4"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-libexecinfo",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-libldns",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-libmagic",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-libucl",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-locales",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-mtree",
+            "version": "15.1p2"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-ncurses-lib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-openssl",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-openssl-lib",
+            "version": "15.1p4"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-pam-lib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-pkg-bootstrap",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-resolvconf",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-runtime",
+            "version": "15.1p6"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-tcpd",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-ufs-lib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-utilities",
+            "version": "15.1p4"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-xz-lib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "CDDL-1.0"
+            ],
+            "name": "FreeBSD-zfs-lib",
+            "version": "15.1p1"
+          },
+          {
+            "licenses": [
+              "Zlib"
+            ],
+            "name": "FreeBSD-zlib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "PD"
+            ],
+            "name": "FreeBSD-zoneinfo",
+            "version": "15.1p5"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-zstd-lib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "MIT"
+            ],
+            "name": "brotli",
+            "version": "1.2.1,1"
+          },
+          {
+            "licenses": [
+              "MPL20"
+            ],
+            "name": "ca_root_nss",
+            "version": "3.132"
+          },
+          {
+            "licenses": [
+              "MIT"
+            ],
+            "name": "expat",
+            "version": "2.9.0"
+          },
+          {
+            "licenses": [
+              "FTL",
+              "GPLv2+"
+            ],
+            "name": "freetype2",
+            "version": "2.14.3"
+          },
+          {
+            "licenses": [
+              "GPLv3+",
+              "LGPL21+"
+            ],
+            "name": "gettext-runtime",
+            "version": "1.0_1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "indexinfo",
+            "version": "0.3.1_1"
+          },
+          {
+            "licenses": [
+              "BSD3CLAUSE",
+              "IJG",
+              "ZLIB"
+            ],
+            "name": "jpeg-turbo",
+            "version": "3.1.4.1"
+          },
+          {
+            "licenses": [
+              "MIT"
+            ],
+            "name": "jq",
+            "version": "1.8.2"
+          },
+          {
+            "licenses": [
+              "MIT"
+            ],
+            "name": "libffi",
+            "version": "3.8.0"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE",
+              "GPLv2"
+            ],
+            "name": "liblz4",
+            "version": "1.10.0_2,1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "mpdecimal",
+            "version": "4.0.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "oniguruma",
+            "version": "6.9.10"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "pkg",
+            "version": "2.9.2"
+          },
+          {
+            "licenses": [
+              "Libpng"
+            ],
+            "name": "png",
+            "version": "1.6.58"
+          },
+          {
+            "licenses": [
+              "PostgreSQL"
+            ],
+            "name": "postgresql18-client",
+            "version": "18.6"
+          },
+          {
+            "licenses": [
+              "PSFL"
+            ],
+            "name": "python312",
+            "version": "3.12.16"
+          },
+          {
+            "licenses": [
+              "GPLv3"
+            ],
+            "name": "readline",
+            "version": "8.3.6"
+          },
+          {
+            "licenses": [
+              "BSD3CLAUSE",
+              "GPLv2"
+            ],
+            "name": "zstd",
+            "version": "1.5.7_2"
+          }
+        ],
+        "go": [],
+        "java": [],
+        "node": [
+          {
+            "name": "netbox",
+            "purl": "",
+            "version": "4.6.2"
+          },
+          {
+            "name": "netbox-graphiql",
+            "purl": "",
+            "version": "4.6.2"
+          }
+        ],
+        "php": [],
+        "python": [
+          {
+            "name": "CacheControl",
+            "purl": "",
+            "version": "0.14.4"
+          },
+          {
+            "name": "Django",
+            "purl": "",
+            "version": "6.1.3"
+          },
+          {
+            "name": "Jinja2",
+            "purl": "",
+            "version": "3.1.6"
+          },
+          {
+            "name": "Markdown",
+            "purl": "",
+            "version": "3.11.3"
+          },
+          {
+            "name": "MarkupSafe",
+            "purl": "",
+            "version": "3.0.4"
+          },
+          {
+            "name": "PyJWT",
+            "purl": "",
+            "version": "2.15.1"
+          },
+          {
+            "name": "PyYAML",
+            "purl": "",
+            "version": "6.0.3"
+          },
+          {
+            "name": "Pygments",
+            "purl": "",
+            "version": "2.21.0"
+          },
+          {
+            "name": "asgiref",
+            "purl": "",
+            "version": "3.13.0"
+          },
+          {
+            "name": "attrs",
+            "purl": "",
+            "version": "26.1.0"
+          },
+          {
+            "name": "autocommand",
+            "purl": "",
+            "version": "2.2.2"
+          },
+          {
+            "name": "backports.tarfile",
+            "purl": "",
+            "version": "1.2.0"
+          },
+          {
+            "name": "certifi",
+            "purl": "",
+            "version": "2026.10.23"
+          },
+          {
+            "name": "cffi",
+            "purl": "",
+            "version": "2.1.1"
+          },
+          {
+            "name": "charset-normalizer",
+            "purl": "",
+            "version": "3.5.2"
+          },
+          {
+            "name": "click",
+            "purl": "",
+            "version": "8.5.1"
+          },
+          {
+            "name": "colorama",
+            "purl": "",
+            "version": "0.4.6"
+          },
+          {
+            "name": "croniter",
+            "purl": "",
+            "version": "7.0.0"
+          },
+          {
+            "name": "cross-web",
+            "purl": "",
+            "version": "0.9.0"
+          },
+          {
+            "name": "cryptography",
+            "purl": "",
+            "version": "50.0.2"
+          },
+          {
+            "name": "defusedxml",
+            "purl": "",
+            "version": "0.7.1"
+          },
+          {
+            "name": "distlib",
+            "purl": "",
+            "version": "0.4.4"
+          },
+          {
+            "name": "distro",
+            "purl": "",
+            "version": "1.9.0"
+          },
+          {
+            "name": "django-cors-headers",
+            "purl": "",
+            "version": "4.9.0"
+          },
+          {
+            "name": "django-debug-toolbar",
+            "purl": "",
+            "version": "8.0.0"
+          },
+          {
+            "name": "django-filter",
+            "purl": "",
+            "version": "26.2"
+          },
+          {
+            "name": "django-htmx",
+            "purl": "",
+            "version": "1.29.0"
+          },
+          {
+            "name": "django-js-asset",
+            "purl": "",
+            "version": "5.0.0"
+          },
+          {
+            "name": "django-mptt",
+            "purl": "",
+            "version": "0.18.0"
+          },
+          {
+            "name": "django-pgware",
+            "purl": "",
+            "version": "1.0.0"
+          },
+          {
+            "name": "django-prometheus",
+            "purl": "",
+            "version": "2.4.0"
+          },
+          {
+            "name": "django-redis",
+            "purl": "",
+            "version": "7.0.0"
+          },
+          {
+            "name": "django-rich",
+            "purl": "",
+            "version": "2.2.0"
+          },
+          {
+            "name": "django-rq",
+            "purl": "",
+            "version": "4.2.0"
+          },
+          {
+            "name": "django-storages",
+            "purl": "",
+            "version": "1.14.6"
+          },
+          {
+            "name": "django-tables2",
+            "purl": "",
+            "version": "3.0.1"
+          },
+          {
+            "name": "django-taggit",
+            "purl": "",
+            "version": "7.0.0"
+          },
+          {
+            "name": "django-timezone-field",
+            "purl": "",
+            "version": "7.2.2"
+          },
+          {
+            "name": "djangorestframework",
+            "purl": "",
+            "version": "3.18.3"
+          },
+          {
+            "name": "drf-spectacular",
+            "purl": "",
+            "version": "0.30.0"
+          },
+          {
+            "name": "drf-spectacular-sidecar",
+            "purl": "",
+            "version": "2026.10.1"
+          },
+          {
+            "name": "example",
+            "purl": "",
+            "version": "21.12"
+          },
+          {
+            "name": "feedparser",
+            "purl": "",
+            "version": "6.0.14"
+          },
+          {
+            "name": "feedparser-sgmllib",
+            "purl": "",
+            "version": "2.1.0"
+          },
+          {
+            "name": "ghp-import",
+            "purl": "",
+            "version": "2.1.0"
+          },
+          {
+            "name": "granian",
+            "purl": "",
+            "version": "2.8.8"
+          },
+          {
+            "name": "graphql-core",
+            "purl": "",
+            "version": "3.3.2"
+          },
+          {
+            "name": "griffelib",
+            "purl": "",
+            "version": "2.4.1"
+          },
+          {
+            "name": "gunicorn",
+            "purl": "",
+            "version": "26.2.0"
+          },
+          {
+            "name": "idna",
+            "purl": "",
+            "version": "3.20"
+          },
+          {
+            "name": "importlib_metadata",
+            "purl": "",
+            "version": "8.7.1"
+          },
+          {
+            "name": "inflection",
+            "purl": "",
+            "version": "0.5.1"
+          },
+          {
+            "name": "jaraco.context",
+            "purl": "",
+            "version": "6.1.0"
+          },
+          {
+            "name": "jaraco.functools",
+            "purl": "",
+            "version": "4.4.0"
+          },
+          {
+            "name": "jaraco.text",
+            "purl": "",
+            "version": "4.0.0"
+          },
+          {
+            "name": "jsonschema",
+            "purl": "",
+            "version": "4.26.0"
+          },
+          {
+            "name": "jsonschema-specifications",
+            "purl": "",
+            "version": "2025.9.1"
+          },
+          {
+            "name": "markdown-it-py",
+            "purl": "",
+            "version": "4.3.0"
+          },
+          {
+            "name": "mdurl",
+            "purl": "",
+            "version": "0.1.2"
+          },
+          {
+            "name": "mergedeep",
+            "purl": "",
+            "version": "1.3.4"
+          },
+          {
+            "name": "mkdocs",
+            "purl": "",
+            "version": "1.6.1"
+          },
+          {
+            "name": "mkdocs-autorefs",
+            "purl": "",
+            "version": "1.4.5"
+          },
+          {
+            "name": "mkdocs-get-deps",
+            "purl": "",
+            "version": "0.2.2"
+          },
+          {
+            "name": "mkdocstrings",
+            "purl": "",
+            "version": "1.0.8"
+          },
+          {
+            "name": "mkdocstrings-python",
+            "purl": "",
+            "version": "2.0.10"
+          },
+          {
+            "name": "more-itertools",
+            "purl": "",
+            "version": "10.8.0"
+          },
+          {
+            "name": "msgpack",
+            "purl": "",
+            "version": "1.2.4"
+          },
+          {
+            "name": "netaddr",
+            "purl": "",
+            "version": "1.3.0"
+          },
+          {
+            "name": "nh3",
+            "purl": "",
+            "version": "0.3.7"
+          },
+          {
+            "name": "oauthlib",
+            "purl": "",
+            "version": "4.0.1"
+          },
+          {
+            "name": "packaging",
+            "purl": "",
+            "version": "26.3"
+          },
+          {
+            "name": "pathspec",
+            "purl": "",
+            "version": "1.1.1"
+          },
+          {
+            "name": "pillow",
+            "purl": "",
+            "version": "13.0.0"
+          },
+          {
+            "name": "pip",
+            "purl": "",
+            "version": "26.3"
+          },
+          {
+            "name": "platformdirs",
+            "purl": "",
+            "version": "4.12.4"
+          },
+          {
+            "name": "prometheus_client",
+            "purl": "",
+            "version": "0.26.0"
+          },
+          {
+            "name": "psycopg",
+            "purl": "",
+            "version": "3.3.8"
+          },
+          {
+            "name": "psycopg-c",
+            "purl": "",
+            "version": "3.3.8"
+          },
+          {
+            "name": "psycopg-pool",
+            "purl": "",
+            "version": "3.3.3"
+          },
+          {
+            "name": "pycparser",
+            "purl": "",
+            "version": "3.12"
+          },
+          {
+            "name": "pygments",
+            "purl": "",
+            "version": "2.21.0"
+          },
+          {
+            "name": "pymdown-extensions",
+            "purl": "",
+            "version": "12.1"
+          },
+          {
+            "name": "pyproject-hooks",
+            "purl": "",
+            "version": "1.3.3"
+          },
+          {
+            "name": "python-dateutil",
+            "purl": "",
+            "version": "4.0.0"
+          },
+          {
+            "name": "python3-openid",
+            "purl": "",
+            "version": "3.2.0"
+          },
+          {
+            "name": "pyyaml_env_tag",
+            "purl": "",
+            "version": "1.1"
+          },
+          {
+            "name": "redis",
+            "purl": "",
+            "version": "8.1.0"
+          },
+          {
+            "name": "referencing",
+            "purl": "",
+            "version": "0.37.0"
+          },
+          {
+            "name": "requests",
+            "purl": "",
+            "version": "2.34.2"
+          },
+          {
+            "name": "requests-oauthlib",
+            "purl": "",
+            "version": "2.0.0"
+          },
+          {
+            "name": "resolvelib",
+            "purl": "",
+            "version": "1.2.1"
+          },
+          {
+            "name": "rich",
+            "purl": "",
+            "version": "15.0.0"
+          },
+          {
+            "name": "rpds-py",
+            "purl": "",
+            "version": "2026.9.1"
+          },
+          {
+            "name": "rq",
+            "purl": "",
+            "version": "2.12.0"
+          },
+          {
+            "name": "setuptools",
+            "purl": "",
+            "version": "70.3.0"
+          },
+          {
+            "name": "social-auth-app-django",
+            "purl": "",
+            "version": "6.1.0"
+          },
+          {
+            "name": "social-auth-core",
+            "purl": "",
+            "version": "5.2.0"
+          },
+          {
+            "name": "sorl-thumbnail",
+            "purl": "",
+            "version": "13.4.0"
+          },
+          {
+            "name": "sqlparse",
+            "purl": "",
+            "version": "0.6.1"
+          },
+          {
+            "name": "strawberry-graphql",
+            "purl": "",
+            "version": "0.341.2"
+          },
+          {
+            "name": "strawberry-graphql-django",
+            "purl": "",
+            "version": "0.96.3"
+          },
+          {
+            "name": "svgwrite",
+            "purl": "",
+            "version": "1.4.3"
+          },
+          {
+            "name": "tablib",
+            "purl": "",
+            "version": "3.10.0"
+          },
+          {
+            "name": "tomli",
+            "purl": "",
+            "version": "2.3.2"
+          },
+          {
+            "name": "tomli-w",
+            "purl": "",
+            "version": "1.2.0"
+          },
+          {
+            "name": "truststore",
+            "purl": "",
+            "version": "0.10.5"
+          },
+          {
+            "name": "typing_extensions",
+            "purl": "",
+            "version": "4.16.0"
+          },
+          {
+            "name": "tzdata",
+            "purl": "",
+            "version": "2026.6"
+          },
+          {
+            "name": "uritemplate",
+            "purl": "",
+            "version": "4.2.0"
+          },
+          {
+            "name": "urllib3",
+            "purl": "",
+            "version": "2.8.0"
+          },
+          {
+            "name": "uvloop",
+            "purl": "",
+            "version": "0.23.0"
+          },
+          {
+            "name": "watchdog",
+            "purl": "",
+            "version": "7.1.0"
+          },
+          {
+            "name": "wheel",
+            "purl": "",
+            "version": "0.46.3"
+          },
+          {
+            "name": "zensical",
+            "purl": "",
+            "version": "0.1.0"
+          },
+          {
+            "name": "zensical-ui",
+            "purl": "",
+            "version": "0.0.41"
+          },
+          {
+            "name": "zipp",
+            "purl": "",
+            "version": "3.23.0"
+          }
+        ],
+        "ruby": [],
+        "rust": []
+      },
+      "source": "upstream",
+      "summary": {
+        "dotnet": 0,
+        "freebsd": 51,
+        "go": 0,
+        "java": 0,
+        "node": 2,
+        "php": 0,
+        "python": 116,
+        "ruby": 0,
+        "rust": 0,
+        "total": 169
+      }
+    }
+  }
+}
